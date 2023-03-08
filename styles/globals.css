@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  background: var(--site-bg);
+  height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Dark Mode Background */
+
+:root{
+  /* color: #fafafae8; */
+   --site-bg: linear-gradient(180deg, #48a9feef, #0BEEF9);
+}
+
+/* Light Mode Background */
+
+.light-mode{
+  --site-bg: linear-gradient(180deg, #fff7E6, #FFFFFF);
+}
+
+
+@keyframes shake {
+  0% { transform: translate(0, 0) rotate(0); }
+  10% { transform: translate(-10px, 0) rotate(-5deg); }
+  20% { transform: translate(10px, 0) rotate(5deg); }
+  30% { transform: translate(-10px, 0) rotate(-5deg); }
+  40% { transform: translate(10px, 0) rotate(5deg); }
+  50% { transform: translate(-10px, 0) rotate(-5deg); }
+  60% { transform: translate(10px, 0) rotate(5deg); }
+  70% { transform: translate(-10px, 0) rotate(-5deg); }
+  80% { transform: translate(10px, 0) rotate(5deg); }
+  90% { transform: translate(-10px, 0) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0); }
+}
+.animate-shake {
+  animation: shake 1s cubic-bezier(.36,.07,.19,.97) 1;
+}
+
+@keyframes shake-jump {
+  0%, 100% {
+    transform: translateX(0) translateY(0) rotate(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px) translateY(-10px) rotate(-10deg);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px) translateY(10px) rotate(10deg);
+  }
+}
+
+@keyframes jump {
+  0%, 50%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-30px);
+  }
+  75% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-jump {
+  animation-name: shake-jump, jump;
+  animation-duration: 0.2s, 0.6s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 17;
+}
+
+input::placeholder{
+  color: #ffffffee !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
