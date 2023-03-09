@@ -114,7 +114,7 @@ const Game = ({mode}) => {
 
           <Image src={img} alt="" className='fixed bottom-0 z-[-100] object-cover h-[550px] md:h-[auto]' priority='true' />
 
-         {showConfetti && <ReactConfetti
+         {showConfetti && <ReactConfetti className='absolute z-[200] top-0'
               width={window.innerWidth}
               height={window.innerHeight}
             />

@@ -20,7 +20,7 @@ const Result = ({isCorrect, hours, minutes, seconds, timeRemaining, currentWord 
 
   return (
     <>
-      <div className={`w-[280px] sm:w-[400px] md:w-[500px] gap-3 md:gap-3 md:text-lg px-3 py-5 md:p-6 flex flex-col items-center bg-gray-900 shadow-lg text-white border-[.125rem] md:border-[.2rem] ${isCorrect ? "border-green-600" : "border-red-600"} absolute z-[110]`}>
+      <div className={`w-[280px] sm:w-[400px] md:w-[500px] gap-3 md:gap-3 md:text-lg px-3 py-5 md:p-6 flex flex-col items-center bg-gray-900 shadow-lg text-white border-[.125rem] md:border-[.2rem] ${isCorrect ? "border-green-600" : "border-red-600"} absolute z-[2] top-[5rem]`}>
               <p className='font-semibold text-[1.1rem] sm:text-[1.2rem] md:text-[1.4rem]'>{isCorrect ? 'MashaAllah Good Job, the word was' : 'The correct word was'} &apos;{words[currentWord]?.text}&apos;</p>
               
               <div className='shadow-lg bg-gray-800 p-2 gap-5 sm:mt-1 md:mt-2 w-[240px] sm:w-[328px] md:w-[370px]'>
@@ -53,7 +53,7 @@ const Result = ({isCorrect, hours, minutes, seconds, timeRemaining, currentWord 
                   </div>
               )}
       </div>
-      <div className="w-screen h-screen fixed z-40 bg-[#000] opacity-80 left-0 top-0 p-6" />
+      <div className="w-screen h-screen fixed z-[1] bg-[#000] opacity-80 left-0 top-0 p-6" />
     </>
   )
 }
