@@ -103,16 +103,16 @@ const Game = ({mode}) => {
           <ParticlesBackground/>
 
 
-          <Image
-          src={lamp} alt="" className='hidden sm:inline-block z-[-10] absolute sm:top-[1.5rem] sm:left-[1.5rem] sm:w-[70px] md:top-[-.2rem] md:left-[4rem] md:w-[100px] lamp-animate' />
+          {mode=='dark' && <Image
+          src={lamp} alt="" className='hidden sm:inline-block z-[-10] absolute sm:top-[1.5rem] sm:left-[1.5rem] sm:w-[70px] md:top-[-.2rem] md:left-[4rem] md:w-[100px] lamp-animate' />}
           
-          <Image src={moon} alt="" className='hidden sm:inline-block fixed z-[-10] sm:top-[15rem] sm:right-[1.3rem] sm:w-[100px] md:top-[18rem] md:right-[8rem] md:w-[170px] moon-animate' />
+          {mode=='dark' && <Image src={moon} alt="" className='hidden sm:inline-block fixed z-[-10] sm:top-[15rem] sm:right-[1.3rem] sm:w-[100px] md:top-[18rem] md:right-[8rem] md:w-[170px] moon-animate' />}
           
           {mode=='light' && <Image src={lampLight} alt="" className='hidden sm:inline-block z-[-10] absolute sm:top-[1.5rem] sm:left-[1.5rem] sm:w-[70px] md:top-[-.2rem] md:left-[4rem] md:w-[100px] lamp-animate' />}
           
           {mode=='light' && <Image src={moonLight} alt="" className='hidden sm:inline-block fixed z-[-10] sm:top-[15rem] sm:right-[1.3rem] sm:w-[100px] md:top-[18rem] md:right-[8rem] md:w-[170px] moon-animate'/>}
 
-          <Image src={img} alt="" className='fixed bottom-0 z-[-100] object-cover h-[550px] md:h-[auto]' />
+          <Image src={img} alt="" className='fixed bottom-0 z-[-100] object-cover h-[550px] md:h-[auto]' priority='true' />
 
          {showConfetti && <ReactConfetti
               width={window.innerWidth}
@@ -165,7 +165,7 @@ const Game = ({mode}) => {
 
                 <p style={{color: mode=='light'? '#222222ef' : '#222222ef'}} className={`capitalize w-fit text-[.85rem] sm:text-[.95rem] md:text-[1rem]`}>{item}</p>
 
-                <span>{ words[currentWord]?.text?.toLowerCase() === item.toLowerCase() ? <i class="ri-check-fill text-[green]"></i> : <i class="ri-close-line text-[red] text-[.85rem] sm:text-[.95rem] md:text-[1rem]"></i>}</span>
+                <span>{ words[currentWord]?.text?.toLowerCase() === item.toLowerCase() ? <i className="ri-check-fill text-[green]"></i> : <i className="ri-close-line text-[red] text-[.85rem] sm:text-[.95rem] md:text-[1rem]"></i>}</span>
               </div>
             ))}
           </div>
