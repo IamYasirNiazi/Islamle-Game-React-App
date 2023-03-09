@@ -11,7 +11,7 @@ a {
 
 body {
   background: var(--site-bg);
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
 }
@@ -77,6 +77,41 @@ body {
   animation-timing-function: ease-out;
   animation-iteration-count: 17;
 }
+
+
+@keyframes moon{
+  0%{
+    transform: translateX(2rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.moon-animate {
+  animation-name: moon;
+  animation-duration: 8s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+}
+
+
+@keyframes lamp{
+  0%{
+    transform: translateX(-2rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.lamp-animate {
+  animation-name: lamp;
+  animation-duration: 8s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+}
+
 
 input::placeholder{
   color: #ffffffee !important;

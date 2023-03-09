@@ -104,10 +104,14 @@ const Game = ({mode}) => {
 
 
           <Image
-          src={lamp} alt="" className='hidden md:inline-block absolute top-[-.2rem] left-[4rem] w-[100px]' />
-          <Image src={moon} alt="" className='hidden md:inline-block absolute top-[13rem] right-[8rem] w-[170px]' />
-          {mode=='light' && <Image src={lampLight} alt="" className='hidden md:inline-block absolute top-[-.2rem] left-[4rem] w-[100px]' />}
-          {mode=='light' && <Image src={moonLight} alt="" className='hidden md:inline-block absolute top-[13rem] right-[8rem] w-[170px]' />}
+          src={lamp} alt="" className='hidden sm:inline-block z-[-10] absolute sm:top-[1.5rem] sm:left-[1.5rem] sm:w-[70px] md:top-[-.2rem] md:left-[4rem] md:w-[100px] lamp-animate' />
+          
+          <Image src={moon} alt="" className='hidden sm:inline-block fixed z-[-10] sm:top-[15rem] sm:right-[1.3rem] sm:w-[100px] md:top-[18rem] md:right-[8rem] md:w-[170px] moon-animate' />
+          
+          {mode=='light' && <Image src={lampLight} alt="" className='hidden sm:inline-block z-[-10] absolute sm:top-[1.5rem] sm:left-[1.5rem] sm:w-[70px] md:top-[-.2rem] md:left-[4rem] md:w-[100px] lamp-animate' />}
+          
+          {mode=='light' && <Image src={moonLight} alt="" className='hidden sm:inline-block fixed z-[-10] sm:top-[15rem] sm:right-[1.3rem] sm:w-[100px] md:top-[18rem] md:right-[8rem] md:w-[170px] moon-animate'/>}
+
           <Image src={img} alt="" className='fixed bottom-0 z-[-100] object-cover h-[550px] md:h-[auto]' />
 
          {showConfetti && <ReactConfetti
@@ -115,7 +119,7 @@ const Game = ({mode}) => {
               height={window.innerHeight}
             />
           } 
-        {/* {isFinished && <Result currentWord={currentWord} timeRemaining={timeRemaining} hours={hours} minutes={minutes} seconds={seconds} isFinished={isFinished} isCorrect={isCorrect } />} */}
+        {isFinished && <Result currentWord={currentWord} timeRemaining={timeRemaining} hours={hours} minutes={minutes} seconds={seconds} isFinished={isFinished} isCorrect={isCorrect } />}
         
         <h1 className='p-3 text-[1.95rem] sm:text-[2.4rem] md:text-[2.6rem] font-bold' style={{color: mode=='light'? '#222222' : '#fffffffb'}}>
           Guess the Word by <Typed
@@ -130,7 +134,7 @@ const Game = ({mode}) => {
 
         <span>
 
-          <span className='text-[1.05rem] sm:text-[1.1rem] md:text-xl capitalize pt-1 pb-2 px-4 rounded' style={{background: mode=='light'? '#3535351e' : 'linear-gradient(140deg, rgba(130, 6, 175, 0.6), rgba(204, 45, 207, 0.7))', color: mode=='light'? '#222222' : '#fff'}}>Word includes '{words[currentWord]?.text[2]}'</span>
+          <span className='text-[1.05rem] sm:text-[1.1rem] md:text-xl capitalize pt-1 pb-2 px-4 rounded' style={{background: mode=='light'? '#3535351e' : 'linear-gradient(140deg, rgba(130, 6, 175, 0.6), rgba(204, 45, 207, 0.7))', color: mode=='light'? '#222222' : '#fff'}}>Word includes &apos;{words[currentWord]?.text[2]}&apos;</span>
 
           <span className='text-[1.05rem] sm:text-[1.1rem] capitalize pt-1 pb-2 px-4 rounded ml-2' style={{background: mode=='light'? '#3535351e' : 'linear-gradient(140deg, rgba(130, 6, 175, 0.6), rgba(204, 45, 207, 0.7))', color: mode=='light'? '#222222' : '#fff'}}>Hint {words[currentWord]?.hint}</span>
 

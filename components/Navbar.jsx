@@ -2,24 +2,23 @@ import Image from 'next/image'
 import Help from '@/components/Help'
 import React, { useRef, useState } from 'react'
 
-const Navbar = ({mode, setMode}) => {
+const Navbar = ({mode, setMode, toggleMode}) => {
 
   const [helpOpen, sethelpOpen] = useState(false)
 
   // const {mode, setMode} = props;
-
   
   
-  const toggleMode = ()=>{
+  // const toggleMode = ()=>{
 
-    if(mode=='light'){
-      document.body.classList.remove('light-mode');
-      setMode('dark');
-    }else{
-      document.body.classList.add('light-mode');
-      setMode('light');
-    }
-  }
+  //   if(mode=='light'){
+  //     document.body.classList.remove('light-mode');
+  //     setMode('dark');
+  //   }else{
+  //     document.body.classList.add('light-mode');
+  //     setMode('light');
+  //   }
+  // }
 
 
   return (
@@ -50,7 +49,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      mode, setMode,
+      mode, setMode, toggleMode,
     },
   }
 }
