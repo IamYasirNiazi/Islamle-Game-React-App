@@ -25,12 +25,6 @@ export const useCount = (isFinished) => {
     return () => clearInterval(timer);
   }, [isFinished]);
 
-  useEffect(() => {
-    if (timeRemaining === 0) {
-      localStorage.removeItem("islamleHistory");
-      localStorage.removeItem("nextWordTimestamp");
-    }
-  }, [timeRemaining]);
 
   const hours = Math.floor(timeRemaining / 3600);
   const minutes = Math.floor((timeRemaining % 3600) / 60);

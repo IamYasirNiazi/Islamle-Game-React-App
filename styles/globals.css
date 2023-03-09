@@ -117,6 +117,7 @@ input::placeholder{
   color: #ffffffee !important;
 }
 
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

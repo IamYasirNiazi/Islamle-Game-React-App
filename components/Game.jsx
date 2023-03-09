@@ -1,6 +1,5 @@
 import { words } from '@/wordlist'
 import React, { useEffect, useState } from 'react'
-import {BiHelpCircle} from 'react-icons/bi'
 // import Help from '@/components/Help'
 import ReactConfetti from 'react-confetti'
 import Result from './Result'
@@ -15,7 +14,7 @@ import lamp from '../public/images/1.png'
 import lampLight from '../public/images/1Light.png'
 import moon from '../public/images/moon.png'
 import moonLight from '../public/images/moonLight.png'
-import {motion} from 'framer-motion'
+import moment from 'moment'
 
 const Game = ({mode}) => {
 
@@ -37,7 +36,7 @@ const Game = ({mode}) => {
   const currentWord = getCurrentWord()
   const isCorrect = gamestat && gamestat[0]?.guesses?.includes(words[currentWord]?.text?.toLowerCase())
 
-  const handleShowConfetti =  () => {
+  const handleShowConfetti =  (isFinished) => {
     setshowConfetti(true);
     const id = setTimeout(() => setshowConfetti(false), 10000);
     return () => clearTimeout(id);
@@ -51,51 +50,41 @@ const Game = ({mode}) => {
 
 
   const handleGuess = async () => {
-    if (guess === "" || !guess)  return alert("guess cant be empty");
-    const islamleHistory = localStorage.getItem("islamleHistory");
-    if (islamleHistory) {
-      const islamleHistoryOject = JSON.parse(islamleHistory);
-      const gamestate = islamleHistoryOject[0]?.gameState
-      if (gamestate === "failed" || gamestate === "correct") return;
-      const todayWord = words[currentWord]?.text;
-      const guesses = islamleHistoryOject[0]?.guesses;
-      if(guesses?.includes(guess)) return;
-      if (todayWord?.toLowerCase() === guess?.toLowerCase()) {
-        islamleHistoryOject[0].guesses.push(guess);
-        islamleHistoryOject[0].gameState = "correct";
-        setcolor("green")
-        await generateNextWord()
-        handleShowConfetti()
-      } else if(islamleHistoryOject[0]?.guesses?.length === 7) {
-        islamleHistoryOject[0].guesses.push(guess);
-        islamleHistoryOject[0].gameState = "failed";
-        setcolor("red")
-        await generateNextWord()
-      }
-      else {
-        islamleHistoryOject[0].guesses.push(guess);
-        setcolor("red")
-      }
-      localStorage.setItem("islamleHistory", JSON.stringify(islamleHistoryOject));
-      setgameStat(islamleHistoryOject)
-      setguess("")
+    if (!guess) {
+      alert("Guess can't be empty");
       return;
-    } 
+    }
+  
+    const islamleHistory = JSON.parse(localStorage.getItem("islamleHistory") || "[]");
+    const { gameState, guesses } = islamleHistory[0] || {};
+  
+    if (gameState === "failed" || gameState === "correct") {
+      return;
+    }
+  
+    const todayWord = words[currentWord]?.text;
 
-    if(guess.toLowerCase() === (words[currentWord]?.text?.toLowerCase())) {
-      localStorage.setItem("islamleHistory", JSON.stringify([{ gameState: "correct", guesses: [guess] }]));
-      setcolor("green")
-      setgameStat([{ gameState: "correct", guesses: [guess] }])
-      setguess("")
-      await generateNextWord()
-      handleShowConfetti()
+    if (guesses?.includes(guess)) {
+      return;
     }
-    else {
-      localStorage.setItem("islamleHistory", JSON.stringify([{ gameState: "going", guesses: [guess] }]));
-      setcolor("red")
-      setguess("")
-      setgameStat([{ gameState: "going", guesses: [guess] }])
+  
+    if (todayWord?.toLowerCase() === guess?.toLowerCase()) {
+      islamleHistory[0] = { gameState: "correct", guesses: [...(guesses || []), guess], lastPlayed: moment().utc().unix() };
+      setcolor("green");
+      await generateNextWord();
+      handleShowConfetti(isFinished);
+    } else if (guesses?.length === 7) {
+      islamleHistory[0] = { gameState: "failed", guesses: [...(guesses || []), guess], lastPlayed: moment().utc().unix() };
+      setcolor("red");
+      await generateNextWord();
+    } else {
+      islamleHistory[0] = { gameState: "going", guesses: [...(guesses || []), guess] };
+      setcolor("red");
     }
+  
+    localStorage.setItem("islamleHistory", JSON.stringify(islamleHistory));
+    setgameStat(islamleHistory);
+    setguess("");
   };
 
   return (
@@ -119,7 +108,7 @@ const Game = ({mode}) => {
               height={window.innerHeight}
             />
           } 
-        {isFinished && <Result currentWord={currentWord} timeRemaining={timeRemaining} hours={hours} minutes={minutes} seconds={seconds} isFinished={isFinished} isCorrect={isCorrect } />}
+        {showConfetti === false && isFinished && <Result currentWord={currentWord} timeRemaining={timeRemaining} hours={hours} minutes={minutes} seconds={seconds} isCorrect={isCorrect } />}
         
         <h1 className='p-3 text-[1.95rem] sm:text-[2.4rem] md:text-[2.6rem] font-bold' style={{color: mode=='light'? '#222222' : '#fffffffb'}}>
           Guess the Word by <Typed
